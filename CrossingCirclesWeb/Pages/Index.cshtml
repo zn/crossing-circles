@@ -1,0 +1,68 @@
+﻿@page
+@using CrossingCircles
+@model CrossingCirclesWeb.Pages.Index
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Проверка пересечений кругов</title>
+	<link rel="stylesheet" href="~/css/main.css">
+</head>
+<body>
+<div id="mainBlock">
+	<form id="form" method="post">
+		<div class="form-group">
+			<div class="group-title">Circle #1</div>
+			<label asp-for="CirclesModel.Circle1X">X:</label>
+			<input type="text" asp-for="CirclesModel.Circle1X">
+			<label asp-for="CirclesModel.Circle1Y">Y:</label>
+			<input type="text" asp-for="CirclesModel.Circle1Y">
+			<label asp-for="CirclesModel.Radius1">Radius:</label>
+			<input type="text" asp-for="CirclesModel.Radius1">
+		</div>
+		<div class="form-group">
+			<div class="group-title">Circle #2</div>
+			<label asp-for="CirclesModel.Circle2X">X:</label>
+			<input type="text" asp-for="CirclesModel.Circle2X">
+			<label asp-for="CirclesModel.Circle2Y">Y:</label>
+			<input type="text" asp-for="CirclesModel.Circle2Y">
+			<label asp-for="CirclesModel.Radius2">Radius:</label>
+			<input type="text" asp-for="CirclesModel.Radius2">
+		</div>
+		<div style="clear: both;"></div>
+		<button type="submit">Calculate!</button>
+	</form>
+
+	@if (Model.IntersectionType != null)
+	{
+		<div id="result">
+			@switch (Model.IntersectionType)
+			{
+				case Intersect.NotIntersect:
+					<div>Точки не пересекаются</div>
+					break;
+				case Intersect.OnePoint:
+					<div>Окружности касаются в точке @($"[{Math.Round(Model.Intersections[0].X, 2)}; {Math.Round(Model.Intersections[0].Y, 2)}]")</div>
+					break;
+				case Intersect.TwoPoint:
+					<div>
+						Окружности пересекаются в двух точках: @($"[{Math.Round(Model.Intersections[0].X,2)}; {Math.Round(Model.Intersections[0].Y,2)}]") и @($"[{Math.Round(Model.Intersections[1].X, 2)}; {Math.Round(Model.Intersections[1].Y, 2)}]")
+					</div>
+					break;
+				case Intersect.Same:
+					<div>Окружности совпадают</div>
+					break;
+			}
+			<br>
+			<div>Проверить на <a target="_blank" href="@($"https://planetcalc.ru/8098/?x1={Model.CirclesModel.Circle1X}&y1={Model.CirclesModel.Circle1Y}&r1={Model.CirclesModel.Radius1}&x2={Model.CirclesModel.Circle2X}&y2={Model.CirclesModel.Circle2Y}&r2={Model.CirclesModel.Radius2}")">planetcalc.ru</a></div>
+		</div>
+	}
+</div>
+</body>
+</html>

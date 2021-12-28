@@ -1,0 +1,44 @@
+#mainBlock{
+    width: fit-content;
+    margin: auto;
+    margin-top: 200px;
+    font-size: 20px;
+}
+
+.form-group{
+    margin: 5px;
+    padding: 10px;
+    border: 1px dashed lightgray;
+    border-radius: 10px;
+    float: left;
+    width: auto;
+}
+
+.form-group > .group-title{
+    font-size: 20px;
+    margin-bottom: 10px;    
+}
+
+.form-group > input {
+    width: 30px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#form > button{
+    display: block;
+    margin: 50px auto;
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    background: darkgreen;
+}
+
+#result{
+    padding: 10px 0;
+    text-align: center;
+    border: 1px dashed lightgray;
+    border-radius: 10px;
+    margin-top: 20px;
+}
