@@ -45,7 +45,7 @@
 			@switch (Model.IntersectionType)
 			{
 				case Intersect.NotIntersect:
-					<div>Точки не пересекаются</div>
+					<div>Окружности не пересекаются</div>
 					break;
 				case Intersect.OnePoint:
 					<div>Окружности касаются в точке @($"[{Math.Round(Model.Intersections[0].X, 2)}; {Math.Round(Model.Intersections[0].Y, 2)}]")</div>
