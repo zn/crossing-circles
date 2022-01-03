@@ -5,9 +5,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY "CrossingCirclesWeb.csproj" .
-RUN dotnet restore "CrossingCirclesWeb.csproj"
+COPY "CrossingCirclesWeb.sln" .
+COPY "CrossingCirclesWeb/CrossingCirclesWeb.csproj" "./CrossingCirclesWeb/"
+COPY "Models/Models.csproj" "./Models/"
+COPY "Tests/Tests.csproj" "./Tests/"
+RUN dotnet restore
 COPY . .
+WORKDIR /src/CrossingCirclesWeb
 RUN dotnet build "CrossingCirclesWeb.csproj" -c Release -o /app/build
 
 FROM build AS publish
