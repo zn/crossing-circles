@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossingCirclesWeb", "CrossingCirclesWeb\CrossingCirclesWeb.csproj", "{28242517-B05A-4D65-ACA6-A658FB2621E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{D0DFADFD-5F26-45C7-B2CD-25C95B180244}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{81FECB72-19AD-4EC2-BD15-2FFF23429A57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{28242517-B05A-4D65-ACA6-A658FB2621E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28242517-B05A-4D65-ACA6-A658FB2621E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28242517-B05A-4D65-ACA6-A658FB2621E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0DFADFD-5F26-45C7-B2CD-25C95B180244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0DFADFD-5F26-45C7-B2CD-25C95B180244}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0DFADFD-5F26-45C7-B2CD-25C95B180244}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0DFADFD-5F26-45C7-B2CD-25C95B180244}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81FECB72-19AD-4EC2-BD15-2FFF23429A57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81FECB72-19AD-4EC2-BD15-2FFF23429A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81FECB72-19AD-4EC2-BD15-2FFF23429A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81FECB72-19AD-4EC2-BD15-2FFF23429A57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

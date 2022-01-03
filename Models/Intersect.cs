@@ -1,4 +1,4 @@
-﻿namespace CrossingCircles
+﻿namespace Models
 {
     public enum Intersect
     {

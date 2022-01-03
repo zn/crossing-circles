@@ -1,8 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Drawing;
-using CrossingCircles;
-
-namespace CrossingCirclesWeb
+﻿namespace CrossingCirclesWeb
 {
     public class CirclesModel
     {
