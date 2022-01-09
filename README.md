@@ -1,2 +1,3 @@
 # crossing-circles
-![main workflow](https://github.com/zn/crossing-circles/actions/workflows/main.yml/badge.svg)
+![tests workflow](https://github.com/zn/crossing-circles/actions/workflows/tests.yml/badge.svg)
+![deployment workflow](https://github.com/zn/crossing-circles/actions/workflows/cicd.yml/badge.svg)
