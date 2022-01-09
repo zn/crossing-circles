@@ -1,0 +1,32 @@
+name: Build and Deploy Docker Image to Azure Web App
+
+on:
+  push:
+    branches: [ master ]
+env:
+  AZURE_WEB_APP: 'crossing-circles'
+  DOCKER_IMAGE_NAME: 'crossing-circles'
+jobs:
+  build-and-deploy-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      -uses: actions/checkout@v2
+      -name: Build the docker image
+      run: docker build . --file Dockerfile --tag '${{ env.DOCKER_IMAGE_NAME }}'
+      -name: Docker login
+      run: docker login --username '${{ secrets.DOCKER_LOGIN }}' --password '${{ secrets.DOCKER_PASSWORD }}'
+      -name: Tag the docker image
+      run: docker tag '${{ env.DOCKER_IMAGE_NAME }}' '${{ secrets.DOCKER_LOGIN }}/${{ env.DOCKER_IMAGE_NAME }}'
+      -name: Push the Docker image
+      run: docker push '${{ secrets.DOCKER_LOGIN }}/${{ env.DOCKER_IMAGE_NAME }}'
+      
+      -name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+      -name: Azure WebApp Deployment
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: '${{ env.AZURE_WEB_APP }}'
+        images: '${{ secrets.DOCKER_LOGIN }}/${{ env.DOCKER_IMAGE_NAME }}'
