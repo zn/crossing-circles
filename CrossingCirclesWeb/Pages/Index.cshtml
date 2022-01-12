@@ -7,6 +7,7 @@
 	Layout = null;
 }
 
+
 <!DOCTYPE html>
 
 <html>
@@ -17,7 +18,7 @@
 <body>
 <div id="mainBlock">
 	<form id="form" method="post">
-		<div class="form-group">
+		<div class="form-group dotted-div">
 			<div class="group-title">Circle #1</div>
 			<label asp-for="CirclesModel.Circle1X">X:</label>
 			<input type="text" asp-for="CirclesModel.Circle1X">
@@ -26,7 +27,7 @@
 			<label asp-for="CirclesModel.Radius1">Radius:</label>
 			<input type="text" asp-for="CirclesModel.Radius1">
 		</div>
-		<div class="form-group">
+		<div class="form-group dotted-div">
 			<div class="group-title">Circle #2</div>
 			<label asp-for="CirclesModel.Circle2X">X:</label>
 			<input type="text" asp-for="CirclesModel.Circle2X">
@@ -41,7 +42,7 @@
 
 	@if (Model.IntersectionType != null)
 	{
-		<div id="result">
+		<div id="result" class="dotted-div">
 			@switch (Model.IntersectionType)
 			{
 				case Intersect.NotIntersect:
@@ -63,9 +64,41 @@
 			<div>Проверить на <a target="_blank" href="@($"https://planetcalc.ru/8098/?x1={Model.CirclesModel.Circle1X}&y1={Model.CirclesModel.Circle1Y}&r1={Model.CirclesModel.Radius1}&x2={Model.CirclesModel.Circle2X}&y2={Model.CirclesModel.Circle2Y}&r2={Model.CirclesModel.Radius2}")">planetcalc.ru</a></div>
 		</div>
 	}
-	<div style="text-align:center;">
-		&copy; Alex Svistunov
-	</div>
+	
+	@{
+		int index = 1;
+	}
+	@if (Model.LastHistoryItems != null && Model.LastHistoryItems.Any())
+	{
+		<p>Предыдущие проверки:</p>
+		foreach (var historyItem in Model.LastHistoryItems)
+		{
+			<div class="dotted-div" style="margin: 5px 0; text-align: center;">
+				<div class="history-indexer">
+					#@(index++)
+				</div>
+				Circle #1 - @($"[{historyItem.CircleCenter1[0]}; {historyItem.CircleCenter1[1]}], R: {historyItem.CircleRadius1}") <br/>
+				Circle #2 - @($"[{historyItem.CircleCenter2[0]}; {historyItem.CircleCenter2[1]}], R: {historyItem.CircleRadius2}") <br/>
+				@switch (historyItem.IntersectType)
+				{
+					case Intersect.NotIntersect:
+						<div>Окружности не пересекаются</div>
+						break;
+					case Intersect.OnePoint:
+						<div>Окружности касаются в точке @($"[{Math.Round(historyItem.Intersections[0], 2)}; {Math.Round(historyItem.Intersections[1], 2)}]")</div>
+						break;
+					case Intersect.TwoPoint:
+						<div>
+							Окружности пересекаются в двух точках: @($"[{Math.Round(historyItem.Intersections[0], 2)}; {Math.Round(historyItem.Intersections[1], 2)}]") и @($"[{Math.Round(historyItem.Intersections[2], 2)}; {Math.Round(historyItem.Intersections[3], 2)}]")
+						</div>
+						break;
+					case Intersect.Same:
+						<div>Окружности совпадают</div>
+						break;
+				}
+			</div>
+		}
+	}
 </div>
 
 </body>
