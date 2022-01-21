@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using CrossingCirclesWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Models;
@@ -8,19 +12,27 @@ namespace CrossingCirclesWeb.Pages
 {
     public class Index : PageModel
     {
+
+        private readonly HistoryService _historyService;
+        public Index(HistoryService historyService)
+        {
+            _historyService = historyService;
+        }
+
         [BindProperty]
         public CirclesModel CirclesModel { get; set; }
         
         public PointF[] Intersections { get; set; }
         public Intersect? IntersectionType { get; set; }
+        public List<HistoryItem> LastHistoryItems { get; set; }
 
         
-        public void OnGet()
+        public async Task OnGet()
         {
-            
+            LastHistoryItems = await _historyService.GetLast();
         }
 
-        public void OnPost()
+        public async Task OnPost()
         {
             if (!ModelState.IsValid)
             {
@@ -31,6 +43,20 @@ namespace CrossingCirclesWeb.Pages
 
             Intersections = c1.GetIntersections(c2, out var intersectionType);
             IntersectionType = intersectionType;
+            LastHistoryItems = await _historyService.GetLast();
+
+            await _historyService.SaveItem(new HistoryItem
+            {
+                CircleCenter1 = new[]{c1.Center.X, c1.Center.Y},
+                CircleCenter2 = new[]{c2.Center.X, c2.Center.Y},
+                CircleRadius1 = c1.Radius,
+                CircleRadius2 = c2.Radius,
+                InsertedDate = DateTime.UtcNow,
+                IntersectType = IntersectionType.Value,
+                Intersections = Array.Empty<float>()
+                    .Concat(Intersections.SelectMany(x => new[] {x.X, x.Y}))
+                    .ToArray()
+            });
         }
     }
 }
