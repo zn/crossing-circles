@@ -3,6 +3,7 @@ name: Build and Deploy Docker Image to Azure Web App
 on:
   push:
     branches: [ master ]
+    paths-ignore: [ '**.md', '**/cicd.yml' ]
 env:
   AZURE_WEB_APP: 'crossing-circles'
   DOCKER_IMAGE_NAME: 'crossing-circles'
