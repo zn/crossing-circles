@@ -23,6 +23,7 @@ namespace CrossingCirclesWeb
                 Configuration.GetSection("CrossingCirclesDatabase"));
 
             services.AddSingleton<HistoryService>();
+            services.AddSingleton<CirclesService>();
             
             services.AddRazorPages()
                 .AddJsonOptions(
