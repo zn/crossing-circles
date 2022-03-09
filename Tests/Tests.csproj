@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Models\Models.csproj" />
+      <ProjectReference Include="..\CrossingCirclesWeb\CrossingCirclesWeb.csproj" />
     </ItemGroup>
 
 </Project>
