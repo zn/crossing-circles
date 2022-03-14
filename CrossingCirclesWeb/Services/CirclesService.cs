@@ -8,15 +8,16 @@ namespace CrossingCirclesWeb.Services
     {
         public const double TOLERANCE = 0.01;
 
+        // https://gist.github.com/jupdike/bfe5eb23d1c395d8a0a1a4ddd94882ac
+        // http://math.stackexchange.com/a/1367732
         public IntersectionsResult GetIntersections(Circle c1, Circle c2)
         {
             var (r1, r2) = (c1.Radius, c2.Radius);
-            (double x1, double y1, double x2, double y2) = (c1.Center.X, c1.Center.Y, c2.Center.X,
-                c2.Center.Y);
+            (double x1, double y1, double x2, double y2) = (c1.Center.X, c1.Center.Y, c2.Center.X, c2.Center.Y);
             // d = distance from center1 to center2
             double d = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
 
-            if (d == 0 && Math.Abs(r1 - r2) < TOLERANCE)
+            if (Math.Abs(d) < TOLERANCE && Math.Abs(r1 - r2) < TOLERANCE)
             {
                 return new IntersectionsResult
                 {
