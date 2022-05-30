@@ -11,4 +11,5 @@ https://docs.google.com/presentation/d/1y-6kYzser0B5zN60vG8-iHwHifRfqyEYRpPcIRyY
 - для юнит-тестов использовалась библиотека __MSTest__;
 - сайт хостится на облаке в __Azure__;
 - CI/CD pipeline настроен на __Github Actions__;
-- __Docker__ для контейнеризации
+- __Docker__ для контейнеризации;
+- в качестве базы данных использовалась __MongoDB__
